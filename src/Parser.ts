@@ -28,7 +28,7 @@ export default class Parser {
     }
 
     require(...expected: TokenType[]): Token {
-        const token = this.match();
+        const token = this.match(...expected);
         if (!token) {
             throw new Error(
                 `На позиции ${this.pos} ожидается ${expected[0].name}`,
@@ -54,7 +54,7 @@ export default class Parser {
     parsePrint(): ExpressionNode {
         const operatorLog = this.match(tokenTypesList.LOG);
         if (operatorLog != null) {
-            return new UnarOperatorNode(operatorLog, this.parseFormula);
+            return new UnarOperatorNode(operatorLog, this.parseFormula());
         }
         throw new Error(
             `Ожидается унарный оператор КОНСОЛЬ на ${this.pos} позиции`,
@@ -122,7 +122,7 @@ export default class Parser {
         if (node instanceof UnarOperatorNode) {
             switch (node.operator.type.name) {
                 case tokenTypesList.LOG.name:
-                    console.log(node.operand);
+                    console.log(this.run(node.operand));
                     return;
             }
         }
