@@ -1,5 +1,5 @@
 import Lexer from './Lexer';
-// import { exampleCode } from './example-code';
+// import { exampleCode } from './exampleCode';
 
 const code = `код РАВНО 5 ПЛЮС 9 ПЛЮС ( 4 МИНУС 6 );
     КОНСОЛЬ код;
@@ -9,5 +9,3 @@ const code = `код РАВНО 5 ПЛЮС 9 ПЛЮС ( 4 МИНУС 6 );
 const lexer = new Lexer(code);
 
 lexer.lexAnalysis();
-
-console.log(lexer.tokenList);
